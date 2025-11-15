@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2uistate>
+    <!--This is a UI state file - its content describes the user interface settings when the project was last open.
+It is entirely optional and the project will load without it.  If you are placing the project under source control,
+you probably do not want to add any .uistate.xml files to the repository.-->
+    <configurations>
+        <active>
+            <configuration name="HTML5" />
+        </active>
+        <display name="HTML5" />
+    </configurations>
+    <open-tabs>
+        <layout order="0">InGame</layout>
+        <layout order="1">RoadMap</layout>
+        <event-sheet order="2">ES_InGame</event-sheet>
+        <event-sheet order="3">ES_Core</event-sheet>
+        <event-sheet order="4">ES_Utils</event-sheet>
+        <event-sheet active="1" order="5">ES_ObjectBehavior</event-sheet>
+    </open-tabs>
+    <properties>
+        <property expanded="1" name="About" />
+        <property expanded="1" name="Project settings" />
+        <property expanded="1" name="Window Size" />
+        <property expanded="1" name="Configuration Settings" />
+    </properties>
+    <families-expanded root="1">
+        <family expanded="1" name="Objects" />
+    </families-expanded>
+    <folders-expanded>
+        <folder expanded="1" path="object-folder/" />
+        <folder expanded="0" path="object-folder/Button/" />
+        <folder expanded="1" path="object-folder/Text/" />
+        <folder expanded="1" path="object-folder/Essential/" />
+        <folder expanded="1" path="object-folder/Data/" />
+        <folder expanded="1" path="object-folder/Object/" />
+        <folder expanded="0" path="object-folder/Object/TT/" />
+        <folder expanded="0" path="object-folder/Object/TB/" />
+        <folder expanded="1" path="object-folder/Background/" />
+        <folder expanded="1" path="layout-folder/" />
+        <folder expanded="1" path="event-folder/" />
+        <folder expanded="1" path="file-folder/" />
+        <folder expanded="1" path="sound-folder/" />
+        <folder expanded="1" path="music-folder/" />
+        <folder expanded="1" path="file-folder/Icons/" />
+        <folder expanded="1" path="file-folder/Level/" />
+        <folder expanded="1" path="animation-folder/TTkiri/" />
+        <folder expanded="1" path="animation-folder/TTtengah/" />
+        <folder expanded="1" path="animation-folder/TTkanan/" />
+        <folder expanded="1" path="animation-folder/TBkiri/" />
+        <folder expanded="1" path="animation-folder/TBtengah/" />
+        <folder expanded="1" path="animation-folder/TBkanan/" />
+        <folder expanded="1" path="animation-folder/Player/" />
+        <folder expanded="1" path="animation-folder/Portal/" />
+        <folder expanded="1" path="animation-folder/River/" />
+        <folder expanded="1" path="animation-folder/Crystal/" />
+        <folder expanded="1" path="animation-folder/Bridge/" />
+        <folder expanded="1" path="animation-folder/jem/" />
+        <folder expanded="1" path="animation-folder/Jembatan2/" />
+        <folder expanded="1" path="animation-folder/Jembatan3/" />
+        <folder expanded="1" path="animation-folder/Jembatan4/" />
+        <folder expanded="1" path="animation-folder/Jembatan5/" />
+        <folder expanded="1" path="animation-folder/Sprite2/" />
+        <folder expanded="1" path="animation-folder/Sprite3/" />
+        <folder expanded="1" path="animation-folder/Semak/" />
+        <folder expanded="1" path="animation-folder/semakK/" />
+        <folder expanded="1" path="animation-folder/Smk/" />
+        <folder expanded="1" path="animation-folder/JembatanA/" />
+        <folder expanded="1" path="animation-folder/JembatanB/" />
+        <folder expanded="1" path="animation-folder/Sprite4/" />
+        <folder expanded="1" path="animation-folder/Sprite5/" />
+        <folder expanded="1" path="animation-folder/Sprite6/" />
+        <folder expanded="1" path="animation-folder/SungaiA/" />
+        <folder expanded="1" path="animation-folder/SungaiB/" />
+        <folder expanded="1" path="animation-folder/Sungai/" />
+        <folder expanded="1" path="animation-folder/SungaiAman/" />
+        <folder expanded="1" path="animation-folder/Skiri/" />
+        <folder expanded="1" path="animation-folder/Skanan/" />
+        <folder expanded="1" path="animation-folder/CodeEditorBackground/" />
+        <folder expanded="1" path="animation-folder/ConsoleBackground/" />
+        <folder expanded="1" path="animation-folder/Sprite/" />
+    </folders-expanded>
+</c2uistate>

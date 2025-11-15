@@ -1,0 +1,1688 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>ES_Core</name>
+    <events>
+        <include>ES_ObjectBehavior</include>
+        <include>ES_Utils</include>
+        <comment>**Event: Event Yang Di jalankan Ketika Pertama Kali Masuk Ke Layout</comment>
+        <event-block sid="510511840660313">
+            <conditions>
+                <condition id="-2" name="On start of layout" sid="134319279018870" type="System" />
+            </conditions>
+            <actions>
+                <action id="1" name="Request project file" sid="356195305944318" type="AJAX">
+                    <param id="0" name="Tag">&quot;loadlevels&quot;</param>
+                    <param id="1" name="File">levels.json</param>
+                </action>
+                <action id="5" name="Check item exists" sid="391745896835652" type="LocalStorage">
+                    <param id="0" name="Key">&quot;progress&quot;</param>
+                </action>
+            </actions>
+            <sub-events>
+                <event-block sid="728564371501995">
+                    <conditions />
+                    <actions />
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>**Event: Load/Save Progress Player</comment>
+        <event-block sid="378009914681081">
+            <conditions>
+                <condition id="9" name="On item exists" sid="749426980750803" type="LocalStorage">
+                    <param id="0" name="Key">&quot;progress&quot;</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="1" name="Get item" sid="537176314694090" type="LocalStorage">
+                    <param id="0" name="Key">&quot;progress&quot;</param>
+                </action>
+                <action id="60" name="LoadJSON" sid="980503224114111" type="ProgressData">
+                    <param id="0" name="JSON">LocalStorage.ItemValue</param>
+                    <param id="1" name="Reference point">0</param>
+                    <param id="2" name="Key {n}"></param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="560228295159316">
+            <conditions>
+                <condition id="10" name="On item missing" sid="897438739606653" type="LocalStorage">
+                    <param id="0" name="Key">&quot;progress&quot;</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="60" name="LoadJSON" sid="332510428872376" type="ProgressData">
+                    <param id="0" name="JSON">&quot;{}&quot;</param>
+                    <param id="1" name="Reference point">0</param>
+                    <param id="2" name="Key {n}"></param>
+                </action>
+                <action id="0" name="Set item" sid="686647505731066" type="LocalStorage">
+                    <param id="0" name="Key">&quot;progress&quot;</param>
+                    <param id="1" name="Value">ProgressData.AsJson(0)</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="232092903776115">
+            <conditions>
+                <condition id="5" name="On error" sid="415155068874378" type="LocalStorage" />
+            </conditions>
+            <actions>
+                <action id="14" name="Log" sid="275273975213959" type="Browser">
+                    <param id="0" name="Type">2</param>
+                    <param id="1" name="Message">LocalStorage.ErrorMessage</param>
+                </action>
+            </actions>
+        </event-block>
+        <comment>**Function: Untuk Load Levels Json</comment>
+        <event-block sid="790714402443112">
+            <conditions>
+                <condition id="0" name="On completed" sid="569317660699951" type="AJAX">
+                    <param id="0" name="Tag">&quot;loadlevels&quot;</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="60" name="LoadJSON" sid="156263495870805" type="LevelsData">
+                    <param id="0" name="JSON">AJAX.LastData</param>
+                    <param id="1" name="Reference point">0</param>
+                    <param id="2" name="Key {n}"></param>
+                </action>
+                <action id="0" name="Call function" sid="980387715861297" type="Function">
+                    <param id="0" name="Name">&quot;LoadLevel&quot;</param>
+                    <param id="1" name="Parameter {n}"></param>
+                </action>
+            </actions>
+        </event-block>
+        <comment>**Function: Untuk Load Level</comment>
+        <event-block sid="965129319080122">
+            <conditions>
+                <condition id="0" name="On function" sid="432737998141744" type="Function">
+                    <param id="0" name="Name">&quot;LoadLevel&quot;</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <variable constant="0" name="InitialCommandText" sid="105324025476929" static="0" type="text"></variable>
+                <event-block sid="681507547751396">
+                    <conditions />
+                    <actions>
+                        <action id="-9" name="Set value" sid="446308340394460" type="System">
+                            <param id="0" name="Variable">3StarLimit</param>
+                            <param id="1" name="Value">LevelsData.Value(0, &quot;levels&quot;, CurrentLevel -1, &quot;starLimits&quot;, &quot;3star&quot;)</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="797309989848079" type="System">
+                            <param id="0" name="Variable">2StarLimit</param>
+                            <param id="1" name="Value">LevelsData.Value(0, &quot;levels&quot;, CurrentLevel -1, &quot;starLimits&quot;, &quot;2star&quot;)</param>
+                        </action>
+                        <action id="60" name="LoadJSON" sid="267817595200992" type="Hints">
+                            <param id="0" name="JSON">LevelsData.AsJson(0, &quot;levels&quot;, CurrentLevel - 1,  &quot;hints&quot;)</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}"></param>
+                        </action>
+                        <action id="200" name="Set Current Path" sid="406087272564468" type="LevelsData">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}">&quot;levels&quot;{###}CurrentLevel - 1{###}&quot;objects&quot;</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="802887994269949" type="System">
+                            <param id="0" name="Variable">InitialCommandText</param>
+                            <param id="1" name="Value">LevelsData.Value(0, &quot;levels&quot;, CurrentLevel -1, &quot;initialCommand&quot;)</param>
+                        </action>
+                        <action id="0" name="Set text" sid="706264077802787" type="CodeInput">
+                            <param id="0" name="Text">InitialCommandText</param>
+                        </action>
+                        <action id="0" name="Call function" sid="532566855197814" type="Function">
+                            <param id="0" name="Name">&quot;SyncCodeNumber&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
+                        <action id="0" name="Call function" sid="806741145051550" type="Function">
+                            <param id="0" name="Name">&quot;CreateObject&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>**Function: Untuk Reset Level</comment>
+        <event-block sid="929264735564530">
+            <conditions>
+                <condition id="0" name="On function" sid="385559987168320" type="Function">
+                    <param id="0" name="Name">&quot;ResetLevel&quot;</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="176959796812958">
+                    <conditions />
+                    <actions>
+                        <action id="-9" name="Set value" sid="316270490533390" type="System">
+                            <param id="0" name="Variable">IsLevelReseting</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="103432267047983" type="System">
+                            <param id="0" name="Variable">LineCount</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="543531948959249" type="System">
+                            <param id="0" name="Variable">LineIndex</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="795826696159826" type="System">
+                            <param id="0" name="Variable">IsLevelComplete</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="408250181598809" type="System">
+                            <param id="0" name="Variable">IsError</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="867246293754996" type="System">
+                            <param id="0" name="Variable">IsSequenceRunning</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="539532435965342" type="System">
+                            <param id="0" name="Variable">IsCommandRunning</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="165634343013943" type="System">
+                            <param id="0" name="Variable">StarRating</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="677567583965609" type="System">
+                            <param id="0" name="Variable">LastFailReason</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="2" name="Set visible" sid="422212202667768" type="NextButton">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="520290324960356" type="System">
+                            <param id="0" name="Variable">IsLevelReseting</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="3" name="Clear" sid="942545581937113" type="Variables" />
+                        <action id="0" name="Clear" sid="536472103821434" type="Stack" />
+                        <action id="1" name="Set size" sid="793931998893782" type="Stack">
+                            <param id="0" name="Width">0</param>
+                            <param id="1" name="Height">1</param>
+                            <param id="2" name="Depth">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="906504429093731">
+                    <conditions>
+                        <condition id="-19" name="Pick all" sid="689180640162602" type="System">
+                            <param id="0" name="Object">Objects</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="760872764535326" type="Objects" />
+                        <action id="0" name="Call function" sid="963369023482429" type="Function">
+                            <param id="0" name="Name">&quot;CreateObject&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>**Function: Untuk Run Level</comment>
+        <event-block sid="330454083985866">
+            <conditions>
+                <condition id="0" name="On function" sid="176182497781713" type="Function">
+                    <param id="0" name="Name">&quot;RunLevel&quot;</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="336419752708452">
+                    <conditions />
+                    <actions>
+                        <action id="-9" name="Set value" sid="915616435123052" type="System">
+                            <param id="0" name="Variable">IsLevelReseting</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="908353524859274" type="System">
+                            <param id="0" name="Variable">LineCount</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="384483325631953" type="System">
+                            <param id="0" name="Variable">LineIndex</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="266088405001683" type="System">
+                            <param id="0" name="Variable">IsLevelComplete</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="401703438721935" type="System">
+                            <param id="0" name="Variable">IsError</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="355489525883626" type="System">
+                            <param id="0" name="Variable">IsSequenceRunning</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="433754094226010" type="System">
+                            <param id="0" name="Variable">IsCommandRunning</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="860772310635725" type="System">
+                            <param id="0" name="Variable">StarRating</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="521999564928002" type="System">
+                            <param id="0" name="Variable">LastFailReason</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="2" name="Set visible" sid="250786948485722" type="NextButton">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="489978530682716" type="System">
+                            <param id="0" name="Variable">IsLevelReseting</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="3" name="Clear" sid="434088449808286" type="Variables" />
+                        <action id="0" name="Clear" sid="448588376866388" type="Stack" />
+                        <action id="1" name="Set size" sid="575488000883431" type="Stack">
+                            <param id="0" name="Width">0</param>
+                            <param id="1" name="Height">1</param>
+                            <param id="2" name="Depth">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="748217797228669">
+                    <conditions>
+                        <condition id="-19" name="Pick all" sid="262898118428701" type="System">
+                            <param id="0" name="Object">Objects</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="338426519049332" type="Objects" />
+                        <action id="0" name="Call function" sid="477182502557806" type="Function">
+                            <param id="0" name="Name">&quot;CreateObject&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>**Function: Untuk Mulai Menjalankan Parse -&gt; Execute Command</comment>
+        <event-block sid="648747228763927">
+            <conditions>
+                <condition id="0" name="On function" sid="816340125391366" type="Function">
+                    <param id="0" name="Name">&quot;RunCommandSequence&quot;</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="287948775175638">
+                    <conditions />
+                    <actions>
+                        <action id="-9" name="Set value" sid="384587338798785" type="System">
+                            <param id="0" name="Variable">IsError</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="599020613466362" type="System">
+                            <param id="0" name="Variable">LineIndex</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="743285710287424" type="System">
+                            <param id="0" name="Variable">IsSequenceRunning</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="158759156293168" type="System">
+                            <param id="0" name="Variable">IsCommandRunning</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>**Function: Setiap Event/Function Yang berjalan ketika Parse -&gt; Execute harus di akhiri Function Ini Agar Dapat Berjalan Ke Proses Selanjutnya</comment>
+        <event-block sid="968376204671659">
+            <conditions>
+                <condition id="0" name="On function" sid="454850869518051" type="Function">
+                    <param id="0" name="Name">&quot;ExecuteCommandComplete&quot;</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="365432277498380">
+                    <conditions />
+                    <actions>
+                        <action id="-10" name="Add to" sid="409603946222977" type="System">
+                            <param id="0" name="Variable">LineIndex</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="141687400306677" type="System">
+                            <param id="0" name="Variable">IsCommandRunning</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>**Function: Event Di Jalankan Ketika Proses Parse -&gt; Execute Selesai Di Jalankan Dan Player Mencapat Titik Portal (Save Progress Player Di Jalankan Disini)</comment>
+        <event-block sid="962227205465010">
+            <conditions>
+                <condition id="0" name="On function" sid="186260768786590" type="Function">
+                    <param id="0" name="Name">&quot;LevelComplete&quot;</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="341206508513183">
+                    <conditions />
+                    <actions>
+                        <action id="-9" name="Set value" sid="582623837335758" type="System">
+                            <param id="0" name="Variable">IsSequenceRunning</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="0" name="Alert" sid="457120878261265" type="Browser">
+                            <param id="0" name="Message">&quot;You did it !!!&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="981602243653875">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="780436755426982" type="System">
+                            <param id="0" name="Variable">LineCount</param>
+                            <param id="1" name="Comparison">3</param>
+                            <param id="2" name="Value">3StarLimit</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="316511146028177" type="System">
+                            <param id="0" name="Variable">StarRating</param>
+                            <param id="1" name="Value">3</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="445495109414642" type="System">
+                            <param id="0" name="Variable">IsLevelComplete</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="157855362932141">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="556030071708949" type="System" />
+                        <condition id="-14" name="Compare variable" sid="528897862083721" type="System">
+                            <param id="0" name="Variable">LineCount</param>
+                            <param id="1" name="Comparison">3</param>
+                            <param id="2" name="Value">2StarLimit</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="910418878759313" type="System">
+                            <param id="0" name="Variable">StarRating</param>
+                            <param id="1" name="Value">2</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="327768448582206" type="System">
+                            <param id="0" name="Variable">IsLevelComplete</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="457494305230086">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="706259441985550" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="840851063978439" type="System">
+                            <param id="0" name="Variable">StarRating</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="553365669041287" type="System">
+                            <param id="0" name="Variable">IsLevelComplete</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="365541946799382">
+                    <conditions>
+                        <condition id="60" name="Is undefined" sid="516528432805600" type="ProgressData">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}">CurrentLevel - 1</param>
+                        </condition>
+                        <condition id="50" name="Is null" sid="582285315565886" type="ProgressData">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}">CurrentLevel - 1</param>
+                        </condition>
+                        <condition id="70" name="Is Empty" sid="936760045747671" type="ProgressData">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}">CurrentLevel - 1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set New Object" sid="473301661931960" type="ProgressData">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}">CurrentLevel </param>
+                        </action>
+                        <action id="20" name="Set Value" sid="730375665686513" type="ProgressData">
+                            <param id="0" name="Value">StarRating</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">CurrentLevel {###}&quot;star&quot;</param>
+                        </action>
+                        <action id="20" name="Set Value" sid="337300732690160" type="ProgressData">
+                            <param id="0" name="Value">IsLevelComplete</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">CurrentLevel{###}&quot;IsComplete&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="244886950092275">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="605817073225150" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="20" name="Set Value" sid="242432503908054" type="ProgressData">
+                            <param id="0" name="Value">StarRating</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">CurrentLevel{###}&quot;star&quot;</param>
+                        </action>
+                        <action id="20" name="Set Value" sid="227520185793317" type="ProgressData">
+                            <param id="0" name="Value">IsLevelComplete</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">CurrentLevel{###}&quot;IsComplete&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="472788677180275">
+                    <conditions />
+                    <actions>
+                        <action id="0" name="Set item" sid="378373263797142" type="LocalStorage">
+                            <param id="0" name="Key">&quot;progress&quot;</param>
+                            <param id="1" name="Value">ProgressData.AsJson(0)</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>**Event: Tiiap 1 Detik Akan Berjalan (Parse -&gt; Execute di jalankan di sini)</comment>
+        <event-block sid="739070633828625">
+            <conditions>
+                <condition id="-6" name="Every X seconds" sid="546225266985750" type="System">
+                    <param id="0" name="Interval (seconds)">1.0</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="14" name="Log" sid="876701686406843" type="Browser">
+                    <param id="0" name="Type">0</param>
+                    <param id="1" name="Message">IsSequenceRunning</param>
+                </action>
+            </actions>
+            <sub-events>
+                <event-block sid="553272164153209">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="549770028126821" type="System">
+                            <param id="0" name="Variable">IsLevelReseting</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="557996213222917" type="System">
+                            <param id="0" name="Variable">IsCommandRunning</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="487048208129217" type="System">
+                            <param id="0" name="Variable">IsSequenceRunning</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="818967699971093" type="System">
+                            <param id="0" name="Variable">IsError</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="984382871848000" type="System">
+                            <param id="0" name="Variable">IsLevelComplete</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="967464604162266" type="System">
+                            <param id="0" name="Variable">IsCommandRunning</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <variable constant="0" name="ParentIndex" sid="975664131776977" static="0" type="number">-1</variable>
+                        <variable constant="0" name="Line" sid="502911629707041" static="0" type="text"></variable>
+                        <variable constant="0" name="Indent" sid="830384920900306" static="0" type="number">0</variable>
+                        <variable constant="0" name="CurrentIndent" sid="904812810117905" static="0" type="number">0</variable>
+                        <event-block sid="803649916039078">
+                            <conditions />
+                            <actions>
+                                <action id="-9" name="Set value" sid="461778536139940" type="System">
+                                    <param id="0" name="Variable">Line</param>
+                                    <param id="1" name="Value">tokenat(CodeInput.Text, LineIndex, newline)</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="579617732599980" type="System">
+                                    <param id="0" name="Variable">Indent</param>
+                                    <param id="1" name="Value">Function.Call(&quot;CountIndent&quot;, Line)</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="443715493956309" type="System">
+                                    <param id="0" name="Variable">Line</param>
+                                    <param id="1" name="Value">trim(Line)</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="537129218241605" type="System">
+                                    <param id="0" name="Variable">LineCount</param>
+                                    <param id="1" name="Value">tokencount(CodeInput.Text, newline)</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="565667438621952">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="938305511003494" type="System">
+                                            <param id="0" name="Variable">LineIndex</param>
+                                            <param id="1" name="Comparison">5</param>
+                                            <param id="2" name="Value">LineCount</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="586334089591040" type="System">
+                                            <param id="0" name="Variable">IsSequenceRunning</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="395169479703781" type="System">
+                                            <param id="0" name="Variable">IsCommandRunning</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="115779923544514" type="System">
+                                            <param id="0" name="Variable">IsLevelComplete</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="819034258561721">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="174075344932919" type="System" />
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="955173415880894">
+                                            <conditions>
+                                                <condition id="-8" name="Compare two values" sid="840251652064225" type="System">
+                                                    <param id="0" name="First value">find(Line, &quot;=&quot;)</param>
+                                                    <param id="1" name="Comparison">4</param>
+                                                    <param id="2" name="Second value">-1</param>
+                                                </condition>
+                                                <condition id="-8" name="Compare two values" sid="796765890672779" type="System">
+                                                    <param id="0" name="First value">find(Line, &quot;==&quot;)</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">-1</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                            <sub-events>
+                                                <variable constant="0" name="Var" sid="884170973120404" static="0" type="text"></variable>
+                                                <variable constant="0" name="Val" sid="277869829180965" static="0" type="text"></variable>
+                                                <event-block sid="768393690601725">
+                                                    <conditions />
+                                                    <actions>
+                                                        <action id="-9" name="Set value" sid="386344436399920" type="System">
+                                                            <param id="0" name="Variable">Var</param>
+                                                            <param id="1" name="Value">trim(tokenat(line, 0, &quot;=&quot;))</param>
+                                                        </action>
+                                                        <action id="-9" name="Set value" sid="408591766736384" type="System">
+                                                            <param id="0" name="Variable">Val</param>
+                                                            <param id="1" name="Value">trim(tokenat(line, 1, &quot;=&quot;))</param>
+                                                        </action>
+                                                        <action id="0" name="Call function" sid="371263242661178" type="Function">
+                                                            <param id="0" name="Name">&quot;SetVariable&quot;</param>
+                                                            <param id="1" name="Parameter {n}">Var{###}Function.Call(&quot;ParseValue&quot;, Val)</param>
+                                                        </action>
+                                                        <action id="0" name="Call function" sid="217452973126463" type="Function">
+                                                            <param id="0" name="Name">&quot;ExecuteCommandComplete&quot;</param>
+                                                            <param id="1" name="Parameter {n}"></param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                        <event-block sid="382320929744461">
+                                            <conditions>
+                                                <condition id="-22" name="Else" sid="414036035594857" type="System" />
+                                                <condition id="-8" name="Compare two values" sid="627557431078858" type="System">
+                                                    <param id="0" name="First value">left(line, 3)</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">&quot;if &quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                            <sub-events>
+                                                <variable constant="0" name="Cond" sid="878968887774943" static="0" type="text"></variable>
+                                                <variable constant="0" name="CondResult" sid="767194979465043" static="0" type="number">0</variable>
+                                                <event-block sid="355699282865762">
+                                                    <conditions />
+                                                    <actions>
+                                                        <action id="6" name="Pop" sid="426906517733468" type="Stack">
+                                                            <param id="0" name="Where">0</param>
+                                                            <param id="1" name="Axis">0</param>
+                                                        </action>
+                                                        <action id="-9" name="Set value" sid="948858189055136" type="System">
+                                                            <param id="0" name="Variable">Cond</param>
+                                                            <param id="1" name="Value">trim(mid(line, 3, len(line) - 4))</param>
+                                                        </action>
+                                                        <action id="-9" name="Set value" sid="393075325347884" type="System">
+                                                            <param id="0" name="Variable">CondResult</param>
+                                                            <param id="1" name="Value">Function.Call(&quot;EvaluateCondition&quot;, Cond)</param>
+                                                        </action>
+                                                        <action id="5" name="Push" sid="594630378297711" type="Stack">
+                                                            <param id="0" name="Where">0</param>
+                                                            <param id="1" name="Value">&quot;if|&quot; &amp; Indent &amp; &quot;|&quot; &amp; CondResult</param>
+                                                            <param id="2" name="Axis">0</param>
+                                                        </action>
+                                                        <action id="0" name="Call function" sid="702005674885815" type="Function">
+                                                            <param id="0" name="Name">&quot;ExecuteCommandComplete&quot;</param>
+                                                            <param id="1" name="Parameter {n}"></param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                        <event-block sid="348189816570671">
+                                            <conditions>
+                                                <condition id="-22" name="Else" sid="928360301187271" type="System" />
+                                                <condition id="-8" name="Compare two values" sid="436147673428280" type="System">
+                                                    <param id="0" name="First value">left(line, 5)</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">&quot;elif &quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                            <sub-events>
+                                                <variable constant="0" name="Cond" sid="663374985434362" static="0" type="text"></variable>
+                                                <variable constant="0" name="CondResult" sid="185816195360861" static="0" type="number">0</variable>
+                                                <variable constant="0" name="LastState" sid="993726488694308" static="0" type="text"></variable>
+                                                <variable constant="0" name="LastResult" sid="121319773278591" static="0" type="number">0</variable>
+                                                <event-block sid="700874460114076">
+                                                    <conditions />
+                                                    <actions>
+                                                        <action id="-9" name="Set value" sid="703510173315966" type="System">
+                                                            <param id="0" name="Variable">LastState</param>
+                                                            <param id="1" name="Value">Stack.Back</param>
+                                                        </action>
+                                                        <action id="-9" name="Set value" sid="292719943508092" type="System">
+                                                            <param id="0" name="Variable">LastResult</param>
+                                                            <param id="1" name="Value">tokenat(LastState, 2, &quot;|&quot;)</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="377753392040953">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="309195735760850" type="System">
+                                                            <param id="0" name="Variable">LastResult</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">0</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="6" name="Pop" sid="333321279659768" type="Stack">
+                                                            <param id="0" name="Where">0</param>
+                                                            <param id="1" name="Axis">0</param>
+                                                        </action>
+                                                        <action id="-9" name="Set value" sid="199168734818689" type="System">
+                                                            <param id="0" name="Variable">Cond</param>
+                                                            <param id="1" name="Value">trim(mid(line, 5, len(line) - 6))</param>
+                                                        </action>
+                                                        <action id="-9" name="Set value" sid="443694471967105" type="System">
+                                                            <param id="0" name="Variable">CondResult</param>
+                                                            <param id="1" name="Value">Function.Call(&quot;EvaluateCondition&quot;, Cond)</param>
+                                                        </action>
+                                                        <action id="5" name="Push" sid="993544082972633" type="Stack">
+                                                            <param id="0" name="Where">0</param>
+                                                            <param id="1" name="Value">&quot;if|&quot; &amp; Indent &amp; &quot;|&quot; &amp; CondResult</param>
+                                                            <param id="2" name="Axis">0</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="840858441673717">
+                                                    <conditions>
+                                                        <condition id="-22" name="Else" sid="902541944094262" type="System" />
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="2" name="Set at X" sid="626162704330675" type="Stack">
+                                                            <param id="0" name="X">Stack.Width -1</param>
+                                                            <param id="1" name="Value">&quot;if|&quot; &amp; indent &amp; &quot;|2&quot;</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="206484222221205">
+                                                    <conditions />
+                                                    <actions>
+                                                        <action id="0" name="Call function" sid="525257772801719" type="Function">
+                                                            <param id="0" name="Name">&quot;ExecuteCommandComplete&quot;</param>
+                                                            <param id="1" name="Parameter {n}"></param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                        <event-block sid="680578911288861">
+                                            <conditions>
+                                                <condition id="-22" name="Else" sid="677226800028137" type="System" />
+                                                <condition id="-8" name="Compare two values" sid="835425636167661" type="System">
+                                                    <param id="0" name="First value">left(line, 5)</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">&quot;else:&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                            <sub-events>
+                                                <variable constant="0" name="LastResult" sid="603160711199350" static="0" type="number">0</variable>
+                                                <variable constant="0" name="LastState" sid="536088928051690" static="0" type="text"></variable>
+                                                <event-block sid="901780930866949">
+                                                    <conditions />
+                                                    <actions>
+                                                        <action id="-9" name="Set value" sid="851037606442729" type="System">
+                                                            <param id="0" name="Variable">LastState</param>
+                                                            <param id="1" name="Value">Stack.Back</param>
+                                                        </action>
+                                                        <action id="-9" name="Set value" sid="457058789262738" type="System">
+                                                            <param id="0" name="Variable">LastResult</param>
+                                                            <param id="1" name="Value">tokenat(LastState, 2, &quot;|&quot;)</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="558328645205880">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="626835396942928" type="System">
+                                                            <param id="0" name="Variable">LastResult</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">0</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="6" name="Pop" sid="963483127681882" type="Stack">
+                                                            <param id="0" name="Where">0</param>
+                                                            <param id="1" name="Axis">0</param>
+                                                        </action>
+                                                        <action id="5" name="Push" sid="817807327494083" type="Stack">
+                                                            <param id="0" name="Where">0</param>
+                                                            <param id="1" name="Value">&quot;if|&quot; &amp; Indent &amp; &quot;|&quot; &amp; 1</param>
+                                                            <param id="2" name="Axis">0</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="286747580984178">
+                                                    <conditions>
+                                                        <condition id="-22" name="Else" sid="128842481263869" type="System" />
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="2" name="Set at X" sid="241688666992333" type="Stack">
+                                                            <param id="0" name="X">Stack.Width -1</param>
+                                                            <param id="1" name="Value">&quot;if|&quot; &amp; indent &amp; &quot;|2&quot;</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="206487494150660">
+                                                    <conditions />
+                                                    <actions>
+                                                        <action id="0" name="Call function" sid="688757527766550" type="Function">
+                                                            <param id="0" name="Name">&quot;ExecuteCommandComplete&quot;</param>
+                                                            <param id="1" name="Parameter {n}"></param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                        <event-block sid="517877113667969">
+                                            <conditions>
+                                                <condition id="-22" name="Else" sid="444647703900406" type="System" />
+                                                <condition id="-8" name="Compare two values" sid="815643090546773" type="System">
+                                                    <param id="0" name="First value">find(Line,&quot;(&quot;)</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Second value">0</param>
+                                                </condition>
+                                                <condition id="-8" name="Compare two values" sid="478313290415253" type="System">
+                                                    <param id="0" name="First value">find(Line,&quot;)&quot;)</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Second value">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                            <sub-events>
+                                                <variable constant="0" name="Cmd" sid="975142754714640" static="0" type="text"></variable>
+                                                <variable constant="0" name="Args" sid="115972637397213" static="0" type="text"></variable>
+                                                <variable constant="0" name="ShouldExecuted" sid="300570209172676" static="0" type="number">0</variable>
+                                                <event-block sid="509132108663184">
+                                                    <conditions />
+                                                    <actions>
+                                                        <action id="-9" name="Set value" sid="456564251572453" type="System">
+                                                            <param id="0" name="Variable">ShouldExecuted</param>
+                                                            <param id="1" name="Value">Function.Call(&quot;ShouldExecute&quot;, Indent)</param>
+                                                        </action>
+                                                        <action id="-9" name="Set value" sid="851072329743561" type="System">
+                                                            <param id="0" name="Variable">Cmd</param>
+                                                            <param id="1" name="Value">left(Line, find(Line,&quot;(&quot;))</param>
+                                                        </action>
+                                                        <action id="-9" name="Set value" sid="548129638794763" type="System">
+                                                            <param id="0" name="Variable">Args</param>
+                                                            <param id="1" name="Value">mid(Line, find(Line,&quot;(&quot;)+1, find(Line,&quot;)&quot;)-find(Line,&quot;(&quot;)-1)</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="229046745009145">
+                                                    <conditions>
+                                                        <condition id="-8" name="Compare two values" sid="459714327414151" type="System">
+                                                            <param id="0" name="First value">ShouldExecuted</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Second value">1</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="0" name="Call function" sid="280338540738464" type="Function">
+                                                            <param id="0" name="Name">&quot;ExecuteCommand&quot;</param>
+                                                            <param id="1" name="Parameter {n}">Cmd{###}Args</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="668405460399301">
+                                                    <conditions>
+                                                        <condition id="-22" name="Else" sid="105851637051886" type="System" />
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="0" name="Call function" sid="163209165401130" type="Function">
+                                                            <param id="0" name="Name">&quot;ExecuteCommandComplete&quot;</param>
+                                                            <param id="1" name="Parameter {n}"></param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                        <event-block sid="812267360950159">
+                                            <conditions>
+                                                <condition id="-22" name="Else" sid="392507988280767" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Call function" sid="596822058985384" type="Function">
+                                                    <param id="0" name="Name">&quot;ExecuteCommandComplete&quot;</param>
+                                                    <param id="1" name="Parameter {n}"></param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <variable constant="0" name="IsCheckPortalCalled" sid="734995438035163" static="0" type="number">0</variable>
+                <comment>TO DO: Ubah Nama Check Portal Menjadi Nama Yang Lebih Mencerminkan Akhir Dari Proses Parse -&gt; Execuute</comment>
+                <event-block sid="525859826777003">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="603509919527682" type="System">
+                            <param id="0" name="Variable">IsLevelReseting</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="112288604916991" type="System">
+                            <param id="0" name="Variable">IsCommandRunning</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="333012674310749" type="System">
+                            <param id="0" name="Variable">IsSequenceRunning</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="104596417581237" type="System">
+                            <param id="0" name="Variable">IsLevelComplete</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="721490289797304" type="System">
+                            <param id="0" name="Variable">IsError</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="642874867851173" type="System">
+                            <param id="0" name="Variable">IsCheckPortalCalled</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="571232753430464" type="System">
+                            <param id="0" name="Variable">IsCheckPortalCalled</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="0" name="Call function" sid="641516328673210" type="Function">
+                            <param id="0" name="Name">&quot;CheckIsLevelComplete&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>Function: Memberhentikan Proses Parse -&gt; Execute Dengan Alasan Error</comment>
+        <event-block sid="894579078318448">
+            <conditions>
+                <condition id="0" name="On function" sid="251654970955076" type="Function">
+                    <param id="0" name="Name">&quot;CommandLineError&quot;</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="699555634836679">
+                    <conditions />
+                    <actions>
+                        <action id="-9" name="Set value" sid="746044813466880" type="System">
+                            <param id="0" name="Variable">IsError</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="841803272807495" type="System">
+                            <param id="0" name="Variable">IsSequenceRunning</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>Function: Untuk Create Object Dari levels.json</comment>
+        <event-block sid="316607487697027">
+            <conditions>
+                <condition id="0" name="On function" sid="900677387737543" type="Function">
+                    <param id="0" name="Name">&quot;CreateObject&quot;</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <variable constant="0" name="ObjectIndex" sid="816771408050973" static="0" type="number">0</variable>
+                <variable constant="0" name="Type" sid="672081888441549" static="0" type="text"></variable>
+                <comment>Tambah Object Baru disni, untuk create dan assign instance variabel khusus (ID, Key, Value, IsOpen)</comment>
+                <event-block sid="436766535092886">
+                    <conditions>
+                        <condition id="-12" name="Repeat" sid="307223485028580" type="System">
+                            <param id="0" name="Count">LevelsData.Size(1)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="411862740559989" type="System">
+                            <param id="0" name="Variable">ObjectIndex</param>
+                            <param id="1" name="Value">loopindex</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="519043878867584" type="System">
+                            <param id="0" name="Variable">Type</param>
+                            <param id="1" name="Value">LevelsData.Value(1, ObjectIndex, &quot;type&quot;)</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <comment>Contoh: Player memiliki Instance Variable ID Yang di dapat dari levels.json dengan key &quot;id&quot; (posisi &quot;id&quot; sama persis dengan posisi x, y dll)</comment>
+                        <event-block sid="312769281605749">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="604923471649007" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;Player&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="818021156535919" type="System">
+                                    <param id="0" name="Object to create">Player</param>
+                                    <param id="1" name="Layer">3</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="857675535824736" type="Player">
+                                    <param id="0" name="Instance variable">ID</param>
+                                    <param id="1" name="Value">LevelsData.Value(1, loopindex, &quot;id&quot;)</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="775302461220214" type="Player">
+                                    <param id="0" name="Instance variable">InitialDirection</param>
+                                    <param id="1" name="Value">LevelsData.Value(1, loopindex, &quot;initialDirection&quot;)</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="876132099957439">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="259750725599053" type="System">
+                                            <param id="0" name="First value">Player.InitialDirection</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">&quot;right&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-8" name="Set angle" sid="219254571685518" type="Player">
+                                            <param id="0" name="Angle">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="768536925798443">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="996319858435495" type="System" />
+                                        <condition id="-8" name="Compare two values" sid="301240509500660" type="System">
+                                            <param id="0" name="First value">Player.InitialDirection</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">&quot;down&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-8" name="Set angle" sid="509454355219611" type="Player">
+                                            <param id="0" name="Angle">90</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="432534225235813">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="925012704087721" type="System" />
+                                        <condition id="-8" name="Compare two values" sid="236456075588457" type="System">
+                                            <param id="0" name="First value">Player.InitialDirection</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">&quot;left&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-8" name="Set angle" sid="249726947934037" type="Player">
+                                            <param id="0" name="Angle">180</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="517291411625903">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="887914353220330" type="System" />
+                                        <condition id="-8" name="Compare two values" sid="664580730960378" type="System">
+                                            <param id="0" name="First value">Player.InitialDirection</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">&quot;up&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-8" name="Set angle" sid="757003757834116" type="Player">
+                                            <param id="0" name="Angle">270</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="275220599586758">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="862413629380354" type="System" />
+                                <condition id="-14" name="Compare variable" sid="671414203747809" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;Portal&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="945894033572729" type="System">
+                                    <param id="0" name="Object to create">Portal</param>
+                                    <param id="1" name="Layer">2</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="590725963612157">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="525558546980604" type="System" />
+                                <condition id="-14" name="Compare variable" sid="154802870635893" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;River&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="559972359120315" type="System">
+                                    <param id="0" name="Object to create">River</param>
+                                    <param id="1" name="Layer">1</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="347460124794143">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="778234023630026" type="System" />
+                                <condition id="-14" name="Compare variable" sid="929243663882867" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;TBkanan&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="944115552421317" type="System">
+                                    <param id="0" name="Object to create">TBkanan</param>
+                                    <param id="1" name="Layer">1</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="270355486005951">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="659414320249992" type="System" />
+                                <condition id="-14" name="Compare variable" sid="705481004697506" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;TBkiri&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="957269724620924" type="System">
+                                    <param id="0" name="Object to create">TBkiri</param>
+                                    <param id="1" name="Layer">1</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="892996400602725">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="639444063472716" type="System" />
+                                <condition id="-14" name="Compare variable" sid="312769921116427" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;TBtengah&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="811481607313754" type="System">
+                                    <param id="0" name="Object to create">TBtengah</param>
+                                    <param id="1" name="Layer">1</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="950195315640706">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="228712334595547" type="System" />
+                                <condition id="-14" name="Compare variable" sid="928953376278110" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;TTkanan&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="456579041147287" type="System">
+                                    <param id="0" name="Object to create">TTkanan</param>
+                                    <param id="1" name="Layer">1</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="246254756191924">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="330260040720810" type="System" />
+                                <condition id="-14" name="Compare variable" sid="479941753419325" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;TTkiri&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="669676171304668" type="System">
+                                    <param id="0" name="Object to create">TTkiri</param>
+                                    <param id="1" name="Layer">1</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="115393560655379">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="671561824752421" type="System" />
+                                <condition id="-14" name="Compare variable" sid="924389647468959" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;TTtengah&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="834573332746268" type="System">
+                                    <param id="0" name="Object to create">TTtengah</param>
+                                    <param id="1" name="Layer">1</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>Contoh lain bisa tambahkan Instance Variabel Seperti VariableName dan VariebleValue pada Bridge. Yang Nantinya Akan DI gunakan Pada Function On VariablesChanged untuk mengecek apakah suatu variabel ada dan sesuai dengan isi bridge</comment>
+                        <event-block sid="486840030581102">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="159637811465879" type="System" />
+                                <condition id="-14" name="Compare variable" sid="342890347502533" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;Bridge&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="258396890346282" type="System">
+                                    <param id="0" name="Object to create">Bridge</param>
+                                    <param id="1" name="Layer">1</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="698161022927241" type="Bridge">
+                                    <param id="0" name="Instance variable">VariableName</param>
+                                    <param id="1" name="Value">LevelsData.Value(1, loopindex, &quot;variableName&quot;)</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="846107086910577" type="Bridge">
+                                    <param id="0" name="Instance variable">VariableValue</param>
+                                    <param id="1" name="Value">LevelsData.Value(1, loopindex, &quot;variableValue&quot;)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="659561342365540">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="362200048273830" type="System" />
+                                <condition id="-14" name="Compare variable" sid="784098542402926" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;Bridge1&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="495352089206682" type="System">
+                                    <param id="0" name="Object to create">jem</param>
+                                    <param id="1" name="Layer">2</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="695689704568628" type="jem">
+                                    <param id="0" name="Instance variable">Variablenama</param>
+                                    <param id="1" name="Value">LevelsData.Value(1, loopindex, &quot;variableName&quot;)</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="327964826712578" type="jem">
+                                    <param id="0" name="Instance variable">Variablevalue</param>
+                                    <param id="1" name="Value">LevelsData.Value(1, loopindex, &quot;variableValue&quot;)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="181803728186188">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="840339224360109" type="System" />
+                                <condition id="-14" name="Compare variable" sid="708644641089990" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;jembatan2&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="117225758589984" type="System">
+                                    <param id="0" name="Object to create">Jembatan2</param>
+                                    <param id="1" name="Layer">2</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="319317658608032">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="352901771525584" type="System" />
+                                <condition id="-14" name="Compare variable" sid="211049583746012" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;jembatan3&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="747479781526622" type="System">
+                                    <param id="0" name="Object to create">Jembatan3</param>
+                                    <param id="1" name="Layer">2</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="638428746985137">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="424283056245831" type="System" />
+                                <condition id="-14" name="Compare variable" sid="648612047267456" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;jembatan4&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="810903035938920" type="System">
+                                    <param id="0" name="Object to create">Jembatan4</param>
+                                    <param id="1" name="Layer">2</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="374094811934951">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="748986836843418" type="System" />
+                                <condition id="-14" name="Compare variable" sid="878986131608146" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;jembatan5&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="167594438115390" type="System">
+                                    <param id="0" name="Object to create">Jembatan5</param>
+                                    <param id="1" name="Layer">2</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="592675523501015">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="880602886952239" type="System" />
+                                <condition id="-14" name="Compare variable" sid="309900482920797" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;bush&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="909172534957666" type="System">
+                                    <param id="0" name="Object to create">Sprite2</param>
+                                    <param id="1" name="Layer">2</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="980228696543540">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="702680511185369" type="System" />
+                                <condition id="-14" name="Compare variable" sid="787534659117939" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;pohon&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="648631981248668" type="System">
+                                    <param id="0" name="Object to create">Sprite3</param>
+                                    <param id="1" name="Layer">2</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="826491334766296">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="235005101162815" type="System" />
+                                <condition id="-14" name="Compare variable" sid="439455056128856" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;smk&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="489203645241627" type="System">
+                                    <param id="0" name="Object to create">Smk</param>
+                                    <param id="1" name="Layer">1</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="761597851648208">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="222984224856851" type="System" />
+                                <condition id="-14" name="Compare variable" sid="644614366425625" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;JembatanA&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="591810355127864" type="System">
+                                    <param id="0" name="Object to create">JembatanA</param>
+                                    <param id="1" name="Layer">2</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="151786104145876">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="460117140992208" type="System" />
+                                <condition id="-14" name="Compare variable" sid="420856936905328" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;JembatanB&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="189358406045948" type="System">
+                                    <param id="0" name="Object to create">JembatanB</param>
+                                    <param id="1" name="Layer">2</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="401347634873315">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="740271069276199" type="System" />
+                                <condition id="-14" name="Compare variable" sid="616518529585702" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;JembatanC&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="814257231286233" type="System">
+                                    <param id="0" name="Object to create">Sprite4</param>
+                                    <param id="1" name="Layer">2</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="654662280652258">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="648786830996912" type="System" />
+                                <condition id="-14" name="Compare variable" sid="102901897117747" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;JembatanD&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="422367660797533" type="System">
+                                    <param id="0" name="Object to create">Sprite5</param>
+                                    <param id="1" name="Layer">2</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="339685508220158">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="374373930036273" type="System" />
+                                <condition id="-14" name="Compare variable" sid="180146350390123" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;JembatanE&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="709315322099785" type="System">
+                                    <param id="0" name="Object to create">Sprite6</param>
+                                    <param id="1" name="Layer">2</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="266138129389726">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="165884519692966" type="System" />
+                                <condition id="-14" name="Compare variable" sid="349931923829350" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;SungaiA&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="498981267224125" type="System">
+                                    <param id="0" name="Object to create">SungaiA</param>
+                                    <param id="1" name="Layer">1</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="301885583517952">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="472363458611226" type="System" />
+                                <condition id="-14" name="Compare variable" sid="452107496206250" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;SungaiB&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="417245934949896" type="System">
+                                    <param id="0" name="Object to create">SungaiB</param>
+                                    <param id="1" name="Layer">1</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="965446473281631">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="531644358337760" type="System" />
+                                <condition id="-14" name="Compare variable" sid="827502574831491" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;Sungai&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="597449403489008" type="System">
+                                    <param id="0" name="Object to create">Sungai</param>
+                                    <param id="1" name="Layer">1</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="349494926113997">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="165871523982349" type="System" />
+                                <condition id="-14" name="Compare variable" sid="953173661371388" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;SungaiAman&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="501747430400824" type="System">
+                                    <param id="0" name="Object to create">SungaiAman</param>
+                                    <param id="1" name="Layer">1</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="435040186656089">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="954337278493788" type="System" />
+                                <condition id="-14" name="Compare variable" sid="615013265322836" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;SungaiKiri&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="588498581721970" type="System">
+                                    <param id="0" name="Object to create">Skiri</param>
+                                    <param id="1" name="Layer">1</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="545942390410503">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="751957912750897" type="System" />
+                                <condition id="-14" name="Compare variable" sid="822021224845458" type="System">
+                                    <param id="0" name="Variable">Type</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;SungaiKanan&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="720595508093458" type="System">
+                                    <param id="0" name="Object to create">Skanan</param>
+                                    <param id="1" name="Layer">1</param>
+                                    <param id="2" name="X">LevelsData.Value(1, loopindex, &quot;x&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                    <param id="3" name="Y">LevelsData.Value(1, loopindex, &quot;y&quot;) * GRIDSIZE + CENTERPOINT</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="480249846291347">
+                    <conditions />
+                    <actions>
+                        <action id="-24" name="Move to top" sid="238044485951165" type="Player" />
+                        <action id="-42" name="Signal" sid="430465679538685" type="System">
+                            <param id="0" name="Tag">&quot;WaitSpawnObject&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>Function: List Command Yang Dapat Di Gunakan User (contoh: player.step(args), turtle.turn(&quot;left&quot;))</comment>
+        <event-block sid="705792845677878">
+            <conditions>
+                <condition id="0" name="On function" sid="175744289225306" type="Function">
+                    <param id="0" name="Name">&quot;ExecuteCommand&quot;</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <comment>Param: 0 contoh player.step</comment>
+                <variable constant="0" name="Cmd" sid="717495124731019" static="0" type="text"></variable>
+                <comment>Param: 1 contoh 1, &quot;left&quot;</comment>
+                <variable constant="0" name="Args" sid="733927584042853" static="0" type="text"></variable>
+                <event-block sid="648821493467209">
+                    <conditions />
+                    <actions>
+                        <action id="-9" name="Set value" sid="328554585864460" type="System">
+                            <param id="0" name="Variable">Cmd</param>
+                            <param id="1" name="Value">Function.Param(0)</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="377124308595685" type="System">
+                            <param id="0" name="Variable">Args</param>
+                            <param id="1" name="Value">Function.Param(1)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="566963865904200">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="316057192067930" type="System">
+                            <param id="0" name="Variable">Cmd</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;player.step&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="116965697320315" type="Function">
+                            <param id="0" name="Name">&quot;PlayerStep&quot;</param>
+                            <param id="1" name="Parameter {n}">int(Args)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="506760879089447">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="842623552554641" type="System" />
+                        <condition id="-14" name="Compare variable" sid="407467984732817" type="System">
+                            <param id="0" name="Variable">Cmd</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;player.turn&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="613155399172996" type="Function">
+                            <param id="0" name="Name">&quot;PlayerTurn&quot;</param>
+                            <param id="1" name="Parameter {n}">Args</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+    </events>
+</c2eventsheet>

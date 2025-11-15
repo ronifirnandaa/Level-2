@@ -1,0 +1,367 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>ES_ObjectBehavior</name>
+    <events>
+        <comment>**Function: Berjalan Ketika Suatu Variabel Berubah (Di Panggil Dari Function SetVariable)</comment>
+        <event-block sid="182974257269132">
+            <conditions>
+                <condition id="0" name="On function" sid="633294846275676" type="Function">
+                    <param id="0" name="Name">&quot;VariableChange&quot;</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <variable constant="0" name="VariableName" sid="739679257887358" static="0" type="text"></variable>
+                <variable constant="0" name="VariableValue" sid="551749617924286" static="0" type="text"></variable>
+                <event-block sid="208120696743973">
+                    <conditions />
+                    <actions>
+                        <action id="-9" name="Set value" sid="568890581196247" type="System">
+                            <param id="0" name="Variable">VariableName</param>
+                            <param id="1" name="Value">Function.Param(0)</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="971253176698284" type="System">
+                            <param id="0" name="Variable">VariableValue</param>
+                            <param id="1" name="Value">Function.Param(1)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Ketika Suatu Variabel Di Beri Sebuah Nilai Dan Nilai Nya Sesuai Maka Lakukan Sesuatu Di Sini</comment>
+                <comment>Conoh Putar Animasi Bridge Terbuka dan Ubah Solid Menjadi Disable</comment>
+                <event-block sid="192499255808665">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="883403007661919" type="System">
+                            <param id="0" name="Variable">VariableName</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">Bridge.VariableName</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="102205211102820" type="System">
+                            <param id="0" name="Variable">VariableValue</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">Bridge.VariableValue</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Alert" sid="891830814296579" type="Browser">
+                            <param id="0" name="Message">Variables.Get(Bridge.VariableName)</param>
+                        </action>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="724545041506867" type="Bridge">
+                            <param id="0" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="127363878244545">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="413162042306726" type="System">
+                            <param id="0" name="Variable">VariableName</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">jem.Variablenama</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="304850742013459" type="System">
+                            <param id="0" name="Variable">VariableValue</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">jem.Variablevalue</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="219158477479078" type="Function">
+                            <param id="0" name="Name">&quot;Log&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;OK&quot;{###}&quot;Jembatan Berhasil Terbuka!&quot;</param>
+                        </action>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="334289257738724" type="jem">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="483310583214038" type="jem">
+                            <param id="0" name="Animation">&quot;Terbuka&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="905492977701686" type="Jembatan2">
+                            <param id="0" name="Animation">&quot;Terbuka&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="842227536183586" type="Jembatan3">
+                            <param id="0" name="Animation">&quot;Terbuka&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="525980196927311" type="Jembatan4">
+                            <param id="0" name="Animation">&quot;Terbuka&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="273563102779223" type="Jembatan5">
+                            <param id="0" name="Animation">&quot;Terbuka&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>Behavior: Player Untuk Maju</comment>
+        <comment>Ketika Player Sampai Tujuan Tanpa Terhalang Solid Maka Jalankan executeCommandComplete Untuk Melanjutka Proses Parse -&gt; Execute</comment>
+        <event-block sid="761997291869281">
+            <conditions>
+                <condition behavior="MoveTo" id="0" name="On hit target position" sid="318639183295149" type="Player" />
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="649698674916914">
+                    <conditions />
+                    <actions>
+                        <action id="0" name="Call function" sid="797572225944978" type="Function">
+                            <param id="0" name="Name">&quot;ExecuteCommandComplete&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>Ketika Object Player Terhalang Solid Maka Jalankan executeCommandComplete Untuk Melanjutka Proses Parse -&gt; Execute</comment>
+        <comment>Bisa Tambahkan Hal Lain Semisal Menabrak Suatu Object Maka Lakukan Sesuatu</comment>
+        <event-block sid="598973649597193">
+            <conditions>
+                <condition behavior="MoveTo" id="5" name="On stopped by solid" sid="581598173228029" type="Player" />
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="662434930683439">
+                    <conditions />
+                    <actions>
+                        <action id="0" name="Call function" sid="683951553952368" type="Function">
+                            <param id="0" name="Name">&quot;ExecuteCommandComplete&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
+                        <action id="0" name="Call function" sid="374078709173023" type="Function">
+                            <param id="0" name="Name">&quot;CommandLineError&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
+                        <action id="0" name="Call function" sid="256059082295930" type="Function">
+                            <param id="0" name="Name">&quot;Log&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;ERROR&quot;{###}&quot;Terjadi Kesalahan di Command line&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="388798763987135">
+            <conditions>
+                <condition id="0" name="On function" sid="900390434209507" type="Function">
+                    <param id="0" name="Name">&quot;PlayerStep&quot;</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="845900345326631">
+                    <conditions />
+                    <actions>
+                        <action behavior="MoveTo" id="8" name="Move to distance-angle" sid="640955354668191" type="Player">
+                            <param id="0" name="Distance">32 * int(Function.Param(0))</param>
+                            <param id="1" name="Angle">Player.Angle</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>Behavior: Player Untuk Berbelok Kanan Atau Kiri</comment>
+        <event-block sid="766034978479591">
+            <conditions>
+                <condition behavior="RotateTo" id="0" name="On hit target angle" sid="222019917517573" type="Player" />
+            </conditions>
+            <actions>
+                <action id="0" name="Call function" sid="127857345943318" type="Function">
+                    <param id="0" name="Name">&quot;ExecuteCommandComplete&quot;</param>
+                    <param id="1" name="Parameter {n}"></param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="351567582113439">
+            <conditions>
+                <condition id="0" name="On function" sid="435916319072054" type="Function">
+                    <param id="0" name="Name">&quot;PlayerTurn&quot;</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <comment>Kenapa &quot;&quot;&quot;right&quot;&quot;&quot; Bukan &quot;right&quot; Langsung? Karena Jika Hanya &quot;right&quot; Maka Di Code Editor Harus Tertulis right bukan &quot;right&quot;</comment>
+                <comment>Jika Di Code Editor Ingin Tertulis &quot;right&quot; Maka Harus Escape Tanda &quot; Dengan Cara Menggunakan &quot;&quot; Yang Hasilnya Menjadi &quot;&quot;&quot;right&quot;&quot;&quot;</comment>
+                <comment>Berlaku Untuk Semua String</comment>
+                <event-block sid="115358449465064">
+                    <conditions>
+                        <condition id="-8" name="Compare two values" sid="196288535676610" type="System">
+                            <param id="0" name="First value">Function.Param(0)</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">&quot;&quot;&quot;right&quot;&quot;&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="RotateTo" id="7" name="Rotate by delta angle" sid="430511540815127" type="Player">
+                            <param id="0" name="dA">90</param>
+                            <param id="1" name="Clockwise">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="531266644479912">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="767884743403226" type="System" />
+                    </conditions>
+                    <actions>
+                        <action behavior="RotateTo" id="7" name="Rotate by delta angle" sid="811667928225355" type="Player">
+                            <param id="0" name="dA">90</param>
+                            <param id="1" name="Clockwise">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="595086167584840">
+            <conditions>
+                <condition id="0" name="On function" sid="763593194537683" type="Function">
+                    <param id="0" name="Name">&quot;CheckIsLevelComplete&quot;</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <comment>Bagian Untuk Cek Apakah Portal Bertabrakan Dengan Player</comment>
+                <comment>Bisa Tambahkan Persyaratan Lain Semisal Harus Melakukan Sesuatu Persyaratan Tertentu Untuk Benar Benar Menyelesaikan Sesuatu</comment>
+                <event-block sid="615414674563244">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="367993610929274" type="Portal">
+                            <param id="0" name="Object">Player</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="234462320786462" type="Function">
+                            <param id="0" name="Name">&quot;LevelComplete&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="753990805090536">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="236127466884382" type="System" />
+                    </conditions>
+                    <actions />
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="686216617043425">
+            <conditions>
+                <condition id="1" name="Is overlapping another object" sid="451435172027131" type="Player">
+                    <param id="0" name="Object">Skanan</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="754800558149341">
+                    <conditions>
+                        <condition id="-19" name="Pick all" sid="114035017055580" type="System">
+                            <param id="0" name="Object">Player</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="796962987821171" type="Player" />
+                        <action id="0" name="Call function" sid="650179478919800" type="Function">
+                            <param id="0" name="Name">&quot;Log&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;ERROR&quot;{###}&quot;Owl Tenggelam! Hindari Area Sungai&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="999847135842676">
+            <conditions>
+                <condition id="1" name="Is overlapping another object" sid="935586854612921" type="Player">
+                    <param id="0" name="Object">Skiri</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="787468869309123">
+                    <conditions>
+                        <condition id="-19" name="Pick all" sid="530757926465796" type="System">
+                            <param id="0" name="Object">Player</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="938071174211056" type="Player" />
+                        <action id="0" name="Call function" sid="135318231109169" type="Function">
+                            <param id="0" name="Name">&quot;Log&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;ERROR&quot;{###}&quot;Owl Tenggelam! Hindari Area Sungai&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="115217703462433">
+            <conditions>
+                <condition id="1" name="Is overlapping another object" sid="256523529847957" type="Player">
+                    <param id="0" name="Object">SungaiA</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="307127130866184">
+                    <conditions>
+                        <condition id="-19" name="Pick all" sid="349208202116408" type="System">
+                            <param id="0" name="Object">Player</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="833715066735218" type="Player" />
+                        <action id="0" name="Call function" sid="792480017132459" type="Function">
+                            <param id="0" name="Name">&quot;Log&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;ERROR&quot;{###}&quot;Owl Tenggelam! Hindari Area Sungai&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="586609750199668">
+            <conditions>
+                <condition id="1" name="Is overlapping another object" sid="427624762490192" type="Player">
+                    <param id="0" name="Object">SungaiB</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="107009510736814">
+                    <conditions>
+                        <condition id="-19" name="Pick all" sid="804829322425716" type="System">
+                            <param id="0" name="Object">Player</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="633276265012916" type="Player" />
+                        <action id="0" name="Call function" sid="631516582156290" type="Function">
+                            <param id="0" name="Name">&quot;Log&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;ERROR&quot;{###}&quot;Owl Tenggelam! Hindari Area Sungai&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="915569744652283">
+            <conditions>
+                <condition id="1" name="Is overlapping another object" sid="512577202938036" type="Player">
+                    <param id="0" name="Object">Sungai</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="994569448049296">
+                    <conditions>
+                        <condition id="-19" name="Pick all" sid="373669778652128" type="System">
+                            <param id="0" name="Object">Player</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="408600226004990" type="Player" />
+                        <action id="0" name="Call function" sid="461791614484571" type="Function">
+                            <param id="0" name="Name">&quot;Log&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;ERROR&quot;{###}&quot;Owl Tenggelam! Hindari Area Sungai&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+    </events>
+</c2eventsheet>

@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>ES_InGame</name>
+    <events>
+        <variable constant="1" name="CenterPoint" sid="263100129054162" static="0" type="number">16</variable>
+        <variable constant="1" name="GridSize" sid="450264477515582" static="0" type="number">32</variable>
+        <variable constant="0" name="CurrentLevel" sid="801743944833345" static="0" type="number">1</variable>
+        <variable constant="0" name="LineIndex" sid="137895667515220" static="0" type="number">0</variable>
+        <variable constant="0" name="LineCount" sid="157915330914624" static="0" type="number">0</variable>
+        <variable constant="0" name="StarRating" sid="867865390583794" static="0" type="number">0</variable>
+        <variable constant="0" name="3StarLimit" sid="468140605261354" static="0" type="number">0</variable>
+        <variable constant="0" name="2StarLimit" sid="445682885798616" static="0" type="number">0</variable>
+        <variable constant="0" name="IsLevelComplete" sid="213647074460292" static="0" type="number">0</variable>
+        <variable constant="0" name="IsCommandRunning" sid="217477961177172" static="0" type="number">0</variable>
+        <variable constant="0" name="IsSequenceRunning" sid="659191675974695" static="0" type="number">0</variable>
+        <variable constant="0" name="IsLevelReseting" sid="805513976941070" static="0" type="number">0</variable>
+        <variable constant="0" name="IsError" sid="920436831985610" static="0" type="number">0</variable>
+        <variable constant="0" name="LastFailReason" sid="201744493348659" static="0" type="text"></variable>
+        <include>ES_Core</include>
+        <comment>UI Button</comment>
+        <event-block sid="706563387225710">
+            <conditions>
+                <condition id="-2" name="On start of layout" sid="269916897810954" type="System" />
+            </conditions>
+            <actions>
+                <action id="11" name="Google" sid="196244967683407" type="WebFontLoader">
+                    <param id="0" name="Name">&quot;Fira Code&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="327846715103771" type="CodeInput">
+                    <param id="0" name="Property name">&quot;font-family&quot;</param>
+                    <param id="1" name="Value">&quot;Fira Code&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="759725819264568" type="CodeInput">
+                    <param id="0" name="Property name">&quot;font-size&quot;</param>
+                    <param id="1" name="Value">&quot;16px&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="201891780270103" type="CodeInput">
+                    <param id="0" name="Property name">&quot;background-color&quot;</param>
+                    <param id="1" name="Value">&quot;#1e2a35&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="357892021306368" type="CodeInput">
+                    <param id="0" name="Property name">&quot;color&quot;</param>
+                    <param id="1" name="Value">&quot;#d6deeb&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="628972247851446" type="CodeInput">
+                    <param id="0" name="Property name">&quot;padding&quot;</param>
+                    <param id="1" name="Value">&quot;16px&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="687535301088288" type="CodeInput">
+                    <param id="0" name="Property name">&quot;outline&quot;</param>
+                    <param id="1" name="Value">&quot;none&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="888858652937935" type="CodeInput">
+                    <param id="0" name="Property name">&quot;border&quot;</param>
+                    <param id="1" name="Value">&quot;none&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="743143735437093" type="CodeInput">
+                    <param id="0" name="Property name">&quot;border-radius&quot;</param>
+                    <param id="1" name="Value">&quot;4px&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="211823717999671" type="CodeNumber">
+                    <param id="0" name="Property name">&quot;font-family&quot;</param>
+                    <param id="1" name="Value">&quot;Fira Code&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="550845975905937" type="CodeNumber">
+                    <param id="0" name="Property name">&quot;font-size&quot;</param>
+                    <param id="1" name="Value">&quot;16px&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="529055986837905" type="CodeNumber">
+                    <param id="0" name="Property name">&quot;background-color&quot;</param>
+                    <param id="1" name="Value">&quot;#18232c&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="349828351969785" type="CodeNumber">
+                    <param id="0" name="Property name">&quot;color&quot;</param>
+                    <param id="1" name="Value">&quot;#5a6b7a&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="230096616524900" type="CodeNumber">
+                    <param id="0" name="Property name">&quot;text-align&quot;</param>
+                    <param id="1" name="Value">&quot;right&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="819908228494068" type="CodeNumber">
+                    <param id="0" name="Property name">&quot;padding&quot;</param>
+                    <param id="1" name="Value">&quot;16px 12px&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="541454346330236" type="CodeNumber">
+                    <param id="0" name="Property name">&quot;outline&quot;</param>
+                    <param id="1" name="Value">&quot;none&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="961384742700264" type="CodeNumber">
+                    <param id="0" name="Property name">&quot;border&quot;</param>
+                    <param id="1" name="Value">&quot;none&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="122112350398295" type="CodeNumber">
+                    <param id="0" name="Property name">&quot;border-right&quot;</param>
+                    <param id="1" name="Value">&quot;1px solid #2f3b46&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="297661098693475" type="CodeNumber">
+                    <param id="0" name="Property name">&quot;border-radius&quot;</param>
+                    <param id="1" name="Value">&quot;4px 0px 0px 4px&quot;</param>
+                </action>
+                <action id="4" name="Set font color" sid="704048453518111" type="TerminalLog">
+                    <param id="0" name="Color">&quot;rgb(214, 222, 235)&quot;</param>
+                </action>
+                <action id="51" name="Set font face only" sid="844953464616920" type="TerminalLog">
+                    <param id="0" name="Font face">&quot;Fira Code&quot;</param>
+                </action>
+            </actions>
+            <sub-events>
+                <event-block sid="390743242783517">
+                    <conditions>
+                        <condition id="1" name="Define tag (class)" sid="812564582849909" type="TerminalLog">
+                            <param id="0" name="Name">&quot;ok&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set font color" sid="731710279429726" type="TerminalLog">
+                            <param id="0" name="Color">&quot;rgb(181, 206, 168)&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="125496942204487">
+                    <conditions>
+                        <condition id="1" name="Define tag (class)" sid="164066073074294" type="TerminalLog">
+                            <param id="0" name="Name">&quot;error&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set font color" sid="859388532073761" type="TerminalLog">
+                            <param id="0" name="Color">&quot;rgb(240, 113, 120)&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="371896607973016">
+                    <conditions>
+                        <condition id="1" name="Define tag (class)" sid="104248062088294" type="TerminalLog">
+                            <param id="0" name="Name">&quot;info&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set font color" sid="516524222137448" type="TerminalLog">
+                            <param id="0" name="Color">&quot;rgb(130, 170, 255)&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="605314941325585">
+                    <conditions>
+                        <condition id="1" name="Define tag (class)" sid="285521842511592" type="TerminalLog">
+                            <param id="0" name="Name">&quot;time&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set font color" sid="667053989766971" type="TerminalLog">
+                            <param id="0" name="Color">&quot;rgb(166, 172, 205)&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="298868363641018">
+            <conditions>
+                <condition id="0" name="On clicked" sid="322003269021102" type="RunButton" />
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="923773810907432">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="885740795411833" type="System">
+                            <param id="0" name="Variable">IsSequenceRunning</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="667790918771519" type="System">
+                            <param id="0" name="Variable">IsLevelComplete</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="0" name="Call function" sid="427398034221318" type="Function">
+                            <param id="0" name="Name">&quot;RunLevel&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
+                        <action id="-41" name="Wait for signal" sid="800687576368648" type="System">
+                            <param id="0" name="Tag">&quot;WaitSpawnObject&quot;</param>
+                        </action>
+                        <action id="0" name="Call function" sid="660416106981474" type="Function">
+                            <param id="0" name="Name">&quot;RunCommandSequence&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="341654416492200">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="801952502495233" type="System" />
+                    </conditions>
+                    <actions />
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="602809370773191">
+            <conditions>
+                <condition id="0" name="On clicked" sid="451563328015854" type="HintButton" />
+            </conditions>
+            <actions />
+        </event-block>
+        <event-block sid="153005121686426">
+            <conditions>
+                <condition id="0" name="On clicked" sid="355976420524738" type="ResetButton" />
+            </conditions>
+            <actions>
+                <action id="0" name="Call function" sid="744853661848204" type="Function">
+                    <param id="0" name="Name">&quot;ResetLevel&quot;</param>
+                    <param id="1" name="Parameter {n}"></param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="100429457209448">
+            <conditions>
+                <condition id="1" name="On text changed" sid="430874901475430" type="CodeInput" />
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="369289354286596">
+                    <conditions />
+                    <actions>
+                        <action id="0" name="Call function" sid="778000747746231" type="Function">
+                            <param id="0" name="Name">&quot;SyncCodeNumber&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="779458467876957">
+            <conditions>
+                <condition id="0" name="On clicked" sid="248711213050655" type="HintButton" />
+            </conditions>
+            <actions>
+                <action id="0" name="Call function" sid="249578323324447" type="Function">
+                    <param id="0" name="Name">&quot;Log&quot;</param>
+                    <param id="1" name="Parameter {n}">&quot;INFO&quot;{###}&quot;Kerjakan soal matematika berikut untuk mendapatkan jawaban &#x0D;&#x0A;(12 × 8) − 46 + 10 = ...&#x0D;&#x0A;&quot;</param>
+                </action>
+            </actions>
+        </event-block>
+    </events>
+</c2eventsheet>

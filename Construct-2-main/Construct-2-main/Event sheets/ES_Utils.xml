@@ -1,0 +1,1163 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>ES_Utils</name>
+    <events>
+        <comment>**Function: Untuk Menghitung Indentasi Baris</comment>
+        <event-block sid="164808762501637">
+            <conditions>
+                <condition id="0" name="On function" sid="793933900754728" type="Function">
+                    <param id="0" name="Name">&quot;CountIndent&quot;</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <variable constant="0" name="i" sid="776452078956570" static="0" type="number">0</variable>
+                <event-block sid="334885250091212">
+                    <conditions>
+                        <condition id="-23" name="While" sid="973676836704704" type="System" />
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="444131402139084">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="184600084220127" type="System">
+                                    <param id="0" name="First value">mid(Function.Param(0), i, 1)</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">&quot; &quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Add to" sid="896738291563132" type="System">
+                                    <param id="0" name="Variable">i</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="317795001040232">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="971355387587289" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-24" name="Stop loop" sid="993034043493684" type="System" />
+                                <action id="1" name="Set return value" sid="305388925467104" type="Function">
+                                    <param id="0" name="Value">i</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>**Function: Untuk Parsing Value/Variable contoh energi = 20, energi1 = energi</comment>
+        <event-block sid="603586181737532">
+            <conditions>
+                <condition id="0" name="On function" sid="176715904127303" type="Function">
+                    <param id="0" name="Name">&quot;ParseValue&quot;</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <variable constant="0" name="Value" sid="888972023445109" static="0" type="text"></variable>
+                <event-block sid="365979553544173">
+                    <conditions />
+                    <actions>
+                        <action id="-9" name="Set value" sid="148790960110225" type="System">
+                            <param id="0" name="Variable">Value</param>
+                            <param id="1" name="Value">Function.Param(0)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="680590708321573">
+                    <conditions>
+                        <condition id="-8" name="Compare two values" sid="185494162469673" type="System">
+                            <param id="0" name="First value">left(value, 1)</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">&quot;&apos;&quot;</param>
+                        </condition>
+                        <condition id="-8" name="Compare two values" sid="877255320680602" type="System">
+                            <param id="0" name="First value">left(value, 1)</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">&quot;&quot;&quot;&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Set return value" sid="715396353416324" type="Function">
+                            <param id="0" name="Value">Value</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="686646425440813">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="695487835396485" type="System" />
+                        <condition id="-8" name="Compare two values" sid="112197770084168" type="System">
+                            <param id="0" name="First value">value</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">str(int(value))</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Set return value" sid="821785243833369" type="Function">
+                            <param id="0" name="Value">float(Value)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="305836040169990">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="991946905314398" type="System" />
+                        <condition id="-8" name="Compare two values" sid="287720272775799" type="System">
+                            <param id="0" name="First value">value</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">&quot;True&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Set return value" sid="444332388520506" type="Function">
+                            <param id="0" name="Value">float(1)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="107963302112424">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="280816618689190" type="System" />
+                        <condition id="-8" name="Compare two values" sid="696321788545975" type="System">
+                            <param id="0" name="First value">value</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">&quot;False&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Set return value" sid="259570439032122" type="Function">
+                            <param id="0" name="Value">float(0)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="992602349261667">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="515217019997114" type="System" />
+                        <condition id="3" name="Has key" sid="547818598782750" type="Variables">
+                            <param id="0" name="Key">Value</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <variable constant="0" name="TmpValue" sid="156884086492595" static="0" type="text"></variable>
+                        <event-block sid="521888230411403">
+                            <conditions />
+                            <actions>
+                                <action id="-9" name="Set value" sid="715974224571008" type="System">
+                                    <param id="0" name="Variable">TmpValue</param>
+                                    <param id="1" name="Value">Variables.Get(value)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="496319080360415">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="677049025501416" type="System">
+                                    <param id="0" name="First value">TmpValue</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">str(float(TmpValue))</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="1" name="Set return value" sid="856593079828974" type="Function">
+                                    <param id="0" name="Value">float(tmpValue)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="123277256690080">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="690359505115758" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="1" name="Set return value" sid="193191622854883" type="Function">
+                                    <param id="0" name="Value">TmpValue</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="230522938516251">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="775659476247805" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Set return value" sid="239374436939023" type="Function">
+                            <param id="0" name="Value">Value</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>**Function: Untuk Mengevaluasi Kondisi Pada IF/ELIF/ELSE contoh Energi == 20. Active == True, Key == &quot;Secret&quot;</comment>
+        <event-block sid="608683741957871">
+            <conditions>
+                <condition id="0" name="On function" sid="468960796394682" type="Function">
+                    <param id="0" name="Name">&quot;EvaluateCondition&quot;</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <variable constant="0" name="CondText" sid="970808723026870" static="0" type="text"></variable>
+                <variable constant="0" name="OP" sid="626993924496382" static="0" type="text"></variable>
+                <variable constant="0" name="LeftCond" sid="198670437848055" static="0" type="text"></variable>
+                <variable constant="0" name="RightCond" sid="432573375849041" static="0" type="text"></variable>
+                <variable constant="0" name="IsLeftValNumber" sid="542207049668969" static="0" type="number">0</variable>
+                <variable constant="0" name="IsRightValNumber" sid="660232185770643" static="0" type="number">0</variable>
+                <variable constant="0" name="LeftVal" sid="152052598360116" static="0" type="text"></variable>
+                <variable constant="0" name="LeftValNum" sid="632706047315845" static="0" type="number">0</variable>
+                <variable constant="0" name="RightVal" sid="954674284803794" static="0" type="text"></variable>
+                <variable constant="0" name="RightValNum" sid="424537994379928" static="0" type="number">0</variable>
+                <event-block sid="982414385661440">
+                    <conditions />
+                    <actions>
+                        <action id="-9" name="Set value" sid="437344265102848" type="System">
+                            <param id="0" name="Variable">CondText</param>
+                            <param id="1" name="Value">Function.Param(0)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="343568868239624">
+                    <conditions>
+                        <condition id="-8" name="Compare two values" sid="546630782544483" type="System">
+                            <param id="0" name="First value">find(CondText, &quot;==&quot;)</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Second value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="678538407305602" type="System">
+                            <param id="0" name="Variable">OP</param>
+                            <param id="1" name="Value">&quot;==&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="657877461323229">
+                    <conditions>
+                        <condition id="-8" name="Compare two values" sid="182144310136985" type="System">
+                            <param id="0" name="First value">find(CondText, &quot;!=&quot;)</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Second value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="762243539863631" type="System">
+                            <param id="0" name="Variable">OP</param>
+                            <param id="1" name="Value">&quot;!=&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="277572793073363">
+                    <conditions>
+                        <condition id="-8" name="Compare two values" sid="391428380988904" type="System">
+                            <param id="0" name="First value">find(CondText, &quot;&gt;=&quot;)</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Second value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="141834236509550" type="System">
+                            <param id="0" name="Variable">OP</param>
+                            <param id="1" name="Value">&quot;&gt;=&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="153705464079564">
+                    <conditions>
+                        <condition id="-8" name="Compare two values" sid="475887646025011" type="System">
+                            <param id="0" name="First value">find(CondText, &quot;&lt;=&quot;)</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Second value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="139395860931511" type="System">
+                            <param id="0" name="Variable">OP</param>
+                            <param id="1" name="Value">&quot;&lt;=&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="734825754111584">
+                    <conditions>
+                        <condition id="-8" name="Compare two values" sid="568957375130006" type="System">
+                            <param id="0" name="First value">find(CondText, &quot;&lt;&quot;)</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Second value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="324863130886767" type="System">
+                            <param id="0" name="Variable">OP</param>
+                            <param id="1" name="Value">&quot;&lt;&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="421970076246437">
+                    <conditions>
+                        <condition id="-8" name="Compare two values" sid="675037785752444" type="System">
+                            <param id="0" name="First value">find(CondText, &quot;&gt;&quot;)</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Second value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="905084243676299" type="System">
+                            <param id="0" name="Variable">OP</param>
+                            <param id="1" name="Value">&quot;&gt;&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="163228848946533">
+                    <conditions />
+                    <actions>
+                        <action id="-9" name="Set value" sid="989536815814354" type="System">
+                            <param id="0" name="Variable">LeftCond</param>
+                            <param id="1" name="Value">trim(tokenat(CondText, 0, OP))</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="515544938954558" type="System">
+                            <param id="0" name="Variable">RightCond</param>
+                            <param id="1" name="Value">trim(tokenat(CondText, 1, OP))</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="579739007077111" type="System">
+                            <param id="0" name="Variable">LeftVal</param>
+                            <param id="1" name="Value">Function.Call(&quot;Parsevalue&quot;, LeftCond)</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="251037940239231" type="System">
+                            <param id="0" name="Variable">RightVal</param>
+                            <param id="1" name="Value">Function.Call(&quot;Parsevalue&quot;, RightCond)</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="115522258649488" type="System">
+                            <param id="0" name="Variable">IsLeftValNumber</param>
+                            <param id="1" name="Value">(float(LeftVal) = Function.Call(&quot;ParseValue&quot;, LeftCond) ? 1 : 0)</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="512022198006885" type="System">
+                            <param id="0" name="Variable">IsRightValNumber</param>
+                            <param id="1" name="Value">(float(RightVal) = Function.Call(&quot;ParseValue&quot;, RightCond)  ? 1 : 0)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="507201007853131">
+                    <conditions />
+                    <actions />
+                </event-block>
+                <event-block sid="602215547668136">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="642259023810889" type="System">
+                            <param id="0" name="Variable">IsLeftValNumber</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="223341847241748" type="System">
+                            <param id="0" name="Variable">LeftValNum</param>
+                            <param id="1" name="Value">Function.Call(&quot;ParseValue&quot;, LeftCond)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="766143651434607">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="161465198761221" type="System" />
+                        <condition id="-14" name="Compare variable" sid="891487268980667" type="System">
+                            <param id="0" name="Variable">IsLeftValNumber</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="572877119372534" type="System">
+                            <param id="0" name="Variable">LeftVal</param>
+                            <param id="1" name="Value">Function.Call(&quot;ParseValue&quot;, LeftCond)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="173579938620726">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="734743864557924" type="System">
+                            <param id="0" name="Variable">IsRightValNumber</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="874483577333145" type="System">
+                            <param id="0" name="Variable">RightValNum</param>
+                            <param id="1" name="Value">Function.Call(&quot;ParseValue&quot;, RightCond)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="851986547804449">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="892160701424272" type="System" />
+                        <condition id="-14" name="Compare variable" sid="391668805929628" type="System">
+                            <param id="0" name="Variable">IsRightValNumber</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="973955284157651" type="System">
+                            <param id="0" name="Variable">RightVal</param>
+                            <param id="1" name="Value">Function.Call(&quot;ParseValue&quot;, RightCond)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="615929953359202">
+                    <conditions>
+                        <condition id="-8" name="Compare two values" sid="639314539926007" type="System">
+                            <param id="0" name="First value">IsLeftValNumber + IsRightValNumber</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">2</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="166648921996671">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="362790736061444" type="System">
+                                    <param id="0" name="Variable">OP</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;==&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="379293562837923">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="881202473252132" type="System">
+                                            <param id="0" name="First value">LeftValNum</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">RightValNum</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="541230195910520" type="Function">
+                                            <param id="0" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="281410629814113">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="627190623915050" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="604016769483329" type="Function">
+                                            <param id="0" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="198651979341242">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="378443811478011" type="System" />
+                                <condition id="-14" name="Compare variable" sid="370587544051409" type="System">
+                                    <param id="0" name="Variable">OP</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;!=&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="165287101656895">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="405075222745498" type="System">
+                                            <param id="0" name="First value">LeftValNum</param>
+                                            <param id="1" name="Comparison">1</param>
+                                            <param id="2" name="Second value">RightValNum</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="114165953338249" type="Function">
+                                            <param id="0" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="354922067077013">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="703252056650832" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="721826165607160" type="Function">
+                                            <param id="0" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="627381649472651">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="953343997908183" type="System" />
+                                <condition id="-14" name="Compare variable" sid="363476240963073" type="System">
+                                    <param id="0" name="Variable">OP</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;&gt;=&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="585789065088833">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="653834717586479" type="System">
+                                            <param id="0" name="First value">LeftValNum</param>
+                                            <param id="1" name="Comparison">5</param>
+                                            <param id="2" name="Second value">RightValNum</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="761674108667086" type="Function">
+                                            <param id="0" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="281866300957375">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="168205351430033" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="398242583421315" type="Function">
+                                            <param id="0" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="808945213132484">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="876063679832772" type="System" />
+                                <condition id="-14" name="Compare variable" sid="145556099984225" type="System">
+                                    <param id="0" name="Variable">OP</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;&lt;=&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="916078640616889">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="193492965057677" type="System">
+                                            <param id="0" name="First value">LeftValNum</param>
+                                            <param id="1" name="Comparison">3</param>
+                                            <param id="2" name="Second value">RightValNum</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="114702163578280" type="Function">
+                                            <param id="0" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="970685943884135">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="620416768601363" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="764591447789780" type="Function">
+                                            <param id="0" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="938878167053669">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="584176507887480" type="System" />
+                                <condition id="-14" name="Compare variable" sid="385082287249653" type="System">
+                                    <param id="0" name="Variable">OP</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;&gt;&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="310815371487832">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="616261693522146" type="System">
+                                            <param id="0" name="First value">LeftValNum</param>
+                                            <param id="1" name="Comparison">4</param>
+                                            <param id="2" name="Second value">RightValNum</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="381193557145282" type="Function">
+                                            <param id="0" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="322874949060752">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="521045631164626" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="662542165023749" type="Function">
+                                            <param id="0" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="275125553228589">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="510877924333550" type="System" />
+                                <condition id="-14" name="Compare variable" sid="473239238549534" type="System">
+                                    <param id="0" name="Variable">OP</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;&lt;&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="691967717291426">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="508880757237769" type="System">
+                                            <param id="0" name="First value">LeftValNum</param>
+                                            <param id="1" name="Comparison">2</param>
+                                            <param id="2" name="Second value">RightValNum</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="288586361565150" type="Function">
+                                            <param id="0" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="844776399927601">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="663329553684583" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="340087811614001" type="Function">
+                                            <param id="0" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="837710461760434">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="969543657359728" type="System" />
+                        <condition id="-8" name="Compare two values" sid="495726563885421" type="System">
+                            <param id="0" name="First value">IsLeftValNumber + IsRightValNumber</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="350549836993143">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="354127355411607" type="System">
+                                    <param id="0" name="Variable">OP</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;==&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="584839715740651">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="451187107245320" type="System">
+                                            <param id="0" name="First value">LeftVal</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">RightVal</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="744064964276784" type="Function">
+                                            <param id="0" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="460492502016996">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="508884661717937" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="707722847111913" type="Function">
+                                            <param id="0" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="518981387967667">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="477257467857493" type="System" />
+                                <condition id="-14" name="Compare variable" sid="943321504144319" type="System">
+                                    <param id="0" name="Variable">OP</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;!=&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="383687864365508">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="395042137389204" type="System">
+                                            <param id="0" name="First value">LeftVal</param>
+                                            <param id="1" name="Comparison">1</param>
+                                            <param id="2" name="Second value">RightVal</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="605805936654116" type="Function">
+                                            <param id="0" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="150901855589311">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="644169306949913" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="551247285506916" type="Function">
+                                            <param id="0" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="130585729534257">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="622948953787608" type="System" />
+                                <condition id="-14" name="Compare variable" sid="362807132207033" type="System">
+                                    <param id="0" name="Variable">OP</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;&gt;=&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="989015222583049">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="174414428924170" type="System">
+                                            <param id="0" name="First value">LeftVal</param>
+                                            <param id="1" name="Comparison">5</param>
+                                            <param id="2" name="Second value">RightVal</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="422426907489272" type="Function">
+                                            <param id="0" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="934623606240047">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="527852506363897" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="570442030242587" type="Function">
+                                            <param id="0" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="834322858151437">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="941836772457682" type="System" />
+                                <condition id="-14" name="Compare variable" sid="858344814125050" type="System">
+                                    <param id="0" name="Variable">OP</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;&lt;=&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="381165647431498">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="581274841778138" type="System">
+                                            <param id="0" name="First value">LeftVal</param>
+                                            <param id="1" name="Comparison">3</param>
+                                            <param id="2" name="Second value">RightVal</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="926080019660301" type="Function">
+                                            <param id="0" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="293649493774763">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="941627189374968" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="599041223647366" type="Function">
+                                            <param id="0" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="213452689724624">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="695910556568858" type="System" />
+                                <condition id="-14" name="Compare variable" sid="899893865233177" type="System">
+                                    <param id="0" name="Variable">OP</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;&gt;&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="126410090213168">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="838401085685959" type="System">
+                                            <param id="0" name="First value">LeftVal</param>
+                                            <param id="1" name="Comparison">4</param>
+                                            <param id="2" name="Second value">RightVal</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="346388182900347" type="Function">
+                                            <param id="0" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="229324439900521">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="217356680901969" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="980358646769884" type="Function">
+                                            <param id="0" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="771067998209287">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="632799620874771" type="System" />
+                                <condition id="-14" name="Compare variable" sid="550173127171469" type="System">
+                                    <param id="0" name="Variable">OP</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;&lt;&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="882206618454745">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="132163400497360" type="System">
+                                            <param id="0" name="First value">LeftVal</param>
+                                            <param id="1" name="Comparison">2</param>
+                                            <param id="2" name="Second value">RightVal</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="121700084851176" type="Function">
+                                            <param id="0" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="921990064985076">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="570582870496276" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="875674111086381" type="Function">
+                                            <param id="0" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>**Function: Untuk Menentukan Apakah Baris Ini Harus Di Jalankan Berdasarkan Posisi Indentasi, Hasil Dari IF/ELIF/ELSE</comment>
+        <event-block sid="122199443230184">
+            <conditions>
+                <condition id="0" name="On function" sid="226818699451824" type="Function">
+                    <param id="0" name="Name">&quot;ShouldExecute&quot;</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <variable constant="0" name="Indent" sid="177147538686687" static="0" type="number">0</variable>
+                <variable constant="0" name="CurrentCanExecute" sid="654530859065056" static="0" type="number">1</variable>
+                <variable constant="0" name="TmpType" sid="472387175055550" static="0" type="text"></variable>
+                <variable constant="0" name="TmpIndent" sid="529878367717421" static="0" type="number">0</variable>
+                <variable constant="0" name="TmpResult" sid="535839364226625" static="0" type="number">0</variable>
+                <variable constant="0" name="Item" sid="903102035883036" static="0" type="text"></variable>
+                <event-block sid="996973600091361">
+                    <conditions>
+                        <condition id="3" name="For each element" sid="256649814313001" type="Stack">
+                            <param id="0" name="Axes">2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="807139526048091" type="System">
+                            <param id="0" name="Variable">Indent</param>
+                            <param id="1" name="Value">Function.Param(0)</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="507349320279655" type="System">
+                            <param id="0" name="Variable">Item</param>
+                            <param id="1" name="Value">Stack.CurValue</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="860401653429077" type="System">
+                            <param id="0" name="Variable">TmpType</param>
+                            <param id="1" name="Value">tokenat(item, 0, &quot;|&quot;)</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="737388757637020" type="System">
+                            <param id="0" name="Variable">TmpIndent</param>
+                            <param id="1" name="Value">int(tokenat(item, 1, &quot;|&quot;))</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="936030418272087" type="System">
+                            <param id="0" name="Variable">TmpResult</param>
+                            <param id="1" name="Value">int(tokenat(item, 2, &quot;|&quot;))</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="932803541906261">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="575852554286434" type="System">
+                                    <param id="0" name="Variable">TmpType</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;if&quot;</param>
+                                </condition>
+                                <condition id="-14" name="Compare variable" sid="521096636056959" type="System">
+                                    <param id="0" name="Variable">TmpIndent</param>
+                                    <param id="1" name="Comparison">2</param>
+                                    <param id="2" name="Value">Indent</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block any="1" sid="128512818174527">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="561707793749858" type="System">
+                                            <param id="0" name="Variable">TmpResult</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                        <condition id="-14" name="Compare variable" sid="728087302678065" type="System">
+                                            <param id="0" name="Variable">TmpResult</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">2</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="353507489482351" type="System">
+                                            <param id="0" name="Variable">CurrentCanExecute</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="607302310074646">
+                    <conditions />
+                    <actions>
+                        <action id="1" name="Set return value" sid="270280873617929" type="Function">
+                            <param id="0" name="Value">CurrentCanExecute</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>**Function: Untuk Memasukkan Nilai Variablle Ke Dalam Dictionary Dan Memanggi Function On VariableChange</comment>
+        <event-block sid="925484802438252">
+            <conditions>
+                <condition id="0" name="On function" sid="677750450081920" type="Function">
+                    <param id="0" name="Name">&quot;SetVariable&quot;</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <variable constant="0" name="ChangedKey" sid="299183688387674" static="0" type="text"></variable>
+                <variable constant="0" name="NewValue" sid="818373529433001" static="0" type="text"></variable>
+                <event-block sid="733767357212445">
+                    <conditions />
+                    <actions>
+                        <action id="-9" name="Set value" sid="134983367286918" type="System">
+                            <param id="0" name="Variable">ChangedKey</param>
+                            <param id="1" name="Value">Function.Param(0)</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="730557294449549" type="System">
+                            <param id="0" name="Variable">NewValue</param>
+                            <param id="1" name="Value">Function.Param(1)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="227621108609481">
+                    <conditions>
+                        <condition id="3" name="Has key" sid="833633631935752" type="Variables">
+                            <param id="0" name="Key">ChangedKey</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Set key" sid="239705525362095" type="Variables">
+                            <param id="0" name="Key">ChangedKey</param>
+                            <param id="1" name="Value">NewValue</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="905379785642157">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="967592723836723" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Add key" sid="715686386125364" type="Variables">
+                            <param id="0" name="Key">ChangedKey</param>
+                            <param id="1" name="Value">NewValue</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="331403681653515">
+                    <conditions />
+                    <actions>
+                        <action id="0" name="Call function" sid="593451404828597" type="Function">
+                            <param id="0" name="Name">&quot;VariableChange&quot;</param>
+                            <param id="1" name="Parameter {n}">ChangedKey{###}NewValue</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>**Function: </comment>
+        <event-block sid="124526509551628">
+            <conditions>
+                <condition id="0" name="On function" sid="853341094458973" type="Function">
+                    <param id="0" name="Name">&quot;SyncCodeNumber&quot;</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <variable constant="0" name="Text" sid="918547085137638" static="0" type="text"></variable>
+                <event-block sid="591505285182744">
+                    <conditions>
+                        <condition id="-10" name="For" sid="704247673261175" type="System">
+                            <param id="0" name="Name">&quot;&quot;</param>
+                            <param id="1" name="Start index">1</param>
+                            <param id="2" name="End index">tokencount(CodeInput.Text, newline)</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="829325546978042">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="531063432909275" type="System">
+                                    <param id="0" name="First value">loopindex</param>
+                                    <param id="1" name="Comparison">1</param>
+                                    <param id="2" name="Second value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Add to" sid="813407181481397" type="System">
+                                    <param id="0" name="Variable">Text</param>
+                                    <param id="1" name="Value">loopindex &amp; newline</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="949239329411512">
+                    <conditions />
+                    <actions>
+                        <action id="0" name="Set text" sid="511041322989842" type="CodeNumber">
+                            <param id="0" name="Text">Text</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="967992051963051">
+            <conditions>
+                <condition id="0" name="On function" sid="603800616288314" type="Function">
+                    <param id="0" name="Name">&quot;Log&quot;</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <variable constant="0" name="Type" sid="593529317399689" static="0" type="text"></variable>
+                <variable constant="0" name="Msg" sid="176466081027546" static="0" type="text"></variable>
+                <variable constant="0" name="Prefix" sid="936715025051742" static="0" type="text"></variable>
+                <variable constant="0" name="Timestamp" sid="247928380858243" static="0" type="text"></variable>
+                <event-block sid="923477941480107">
+                    <conditions />
+                    <actions>
+                        <action id="-9" name="Set value" sid="722260258116185" type="System">
+                            <param id="0" name="Variable">Type</param>
+                            <param id="1" name="Value">Function.Param(0)</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="133178914071549" type="System">
+                            <param id="0" name="Variable">Msg</param>
+                            <param id="1" name="Value">Function.Param(1)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="305415491343030">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="851814289000128" type="System">
+                            <param id="0" name="Variable">Type</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;OK&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="708896782199684" type="System">
+                            <param id="0" name="Variable">Prefix</param>
+                            <param id="1" name="Value">&quot;&lt;class=&quot;&quot;ok&quot;&quot;&gt;[OK]&lt;/class&gt;&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="690168154687856">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="850639180423607" type="System" />
+                        <condition id="-14" name="Compare variable" sid="992272671958520" type="System">
+                            <param id="0" name="Variable">Type</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;ERROR&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="416320189788162" type="System">
+                            <param id="0" name="Variable">Prefix</param>
+                            <param id="1" name="Value">&quot;&lt;class=&quot;&quot;error&quot;&quot;&gt;[ERROR]&lt;/class&gt;&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="637884150181472">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="748334317184725" type="System" />
+                        <condition id="-14" name="Compare variable" sid="728985335422923" type="System">
+                            <param id="0" name="Variable">Type</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;INFO&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="916100525213109" type="System">
+                            <param id="0" name="Variable">Prefix</param>
+                            <param id="1" name="Value">&quot;&lt;class=&quot;&quot;info&quot;&quot;&gt;[INFO]&lt;/class&gt;&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="993819765760883">
+                    <conditions />
+                    <actions>
+                        <action id="-9" name="Set value" sid="739381298995923" type="System">
+                            <param id="0" name="Variable">Timestamp</param>
+                            <param id="1" name="Value">Moment.Format(&quot;HH:mm:ss&quot;)</param>
+                        </action>
+                        <action id="1" name="Append text" sid="318016678785075" type="TerminalLog">
+                            <param id="0" name="Text">&quot;&lt;class=&quot;&quot;time&quot;&quot;&gt; [&quot; &amp; TimeStamp &amp; &quot;] &lt;/class&gt;&quot; &amp; Prefix &amp; &quot;   &quot; &amp; Msg &amp; newline</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>===================================================================================================</comment>
+        <comment>Bisa Tambahkan Utils Baru: Seperti Utils Untuk Menghitung Jarak Object Dengan Object Lain</comment>
+        <comment>===================================================================================================</comment>
+    </events>
+</c2eventsheet>
